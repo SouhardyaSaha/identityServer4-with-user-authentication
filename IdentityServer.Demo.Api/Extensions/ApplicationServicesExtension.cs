@@ -16,10 +16,6 @@ public static class ApplicationServicesExtension
             {
                 options.Authority = "https://localhost:5001";
                 options.Audience = "identity-server-demo-api";
-                // options.TokenValidationParameters = new TokenValidationParameters
-                // {
-                //     ValidateAudience = false
-                // };
             });
         
         services.AddCors(o => o.AddPolicy("CorsPolicy", policy =>

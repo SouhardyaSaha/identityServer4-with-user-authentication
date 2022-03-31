@@ -18,7 +18,7 @@ public static class Config
             {
                 new Secret("secret".Sha256())
             },
-            AllowedScopes = { "identity-server-demo-api", "write", "read", "openid", "profile", "email" },
+            AllowedScopes = new List<string> { "identity-server-demo-api", "write", "read", "openid", "profile", "email" },
             AllowedCorsOrigins = new List<string>
             {
                 "http://localhost:3006",
@@ -35,6 +35,7 @@ public static class Config
             DisplayName = "Identity Server Demo API",
             Scopes = new List<string>
             {
+                "identity-server-demo-api",
                 "write",
                 "read"
             }

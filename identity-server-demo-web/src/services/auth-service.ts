@@ -17,7 +17,7 @@ export class AuthService {
       monitorSession: false,
       post_logout_redirect_uri: "http://localhost:3006/",
       response_type: "code", // for Auth Code flow
-      scope: "read openid profile email",
+      scope: "identity-server-demo-api read openid profile email",
       userStore: new WebStorageStateStore({ store: window.localStorage }), // set this to save user info in localStorage
     };
     this.userManager = new UserManager(settings);
