@@ -8,14 +8,17 @@ public static class Config
     {
         new Client
         {
-            // ClientName = "Identity Server",
             ClientId = "identity-server-demo-web",
-            AllowedGrantTypes = new List<string> {GrantType.AuthorizationCode},
+            AllowedGrantTypes = new List<string> { GrantType.AuthorizationCode },
             RequireClientSecret = false,
             RequireConsent = false,
-            RedirectUris = new List<string> {"http://localhost:3006/sigin-callback.html"},
-            PostLogoutRedirectUris = new List<string> {"http://localhost:3006/"},
-            AllowedScopes = {"identity-server-demo-api", "write", "read", "openid", "profile", "email"},
+            RedirectUris = new List<string> { "http://localhost:3006/signin-callback.html" },
+            PostLogoutRedirectUris = new List<string> { "http://localhost:3006/" },
+            ClientSecrets =
+            {
+                new Secret("secret".Sha256())
+            },
+            AllowedScopes = { "identity-server-demo-api", "write", "read", "openid", "profile", "email" },
             AllowedCorsOrigins = new List<string>
             {
                 "http://localhost:3006",
