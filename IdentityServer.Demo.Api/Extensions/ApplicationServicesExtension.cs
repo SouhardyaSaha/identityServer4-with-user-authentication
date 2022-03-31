@@ -28,7 +28,7 @@ public static class ApplicationServicesExtension
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials()
-                .WithOrigins("http://localhost:3000");
+                .WithOrigins("http://localhost:3006");
         }));
 
         return services;
