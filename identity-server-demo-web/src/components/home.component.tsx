@@ -1,8 +1,8 @@
-import { ReactElement } from 'react';
-import { AuthService } from '../services/auth-service';
+import { ReactElement } from "react";
+import { AuthService } from "../services/auth-service";
 
 export default function Home(): ReactElement {
-   const authService: AuthService = new AuthService();
+  const authService: AuthService = new AuthService();
 
   const login = () => {
     authService.login();
@@ -10,11 +10,11 @@ export default function Home(): ReactElement {
 
   return (
     <>
-      <div className='row'>
-        <div className='col-md-12 text-center' style={{ marginTop: '30px' }}>
+      <div className="row">
+        <div className="col-md-12 text-center" style={{ marginTop: "30px" }}>
           <button
-            className='btn btn-primary btn-login'
-            style={{ margin: '10px' }}
+            className="btn btn-primary btn-login"
+            style={{ margin: "10px" }}
             onClick={login}
           >
             Login
