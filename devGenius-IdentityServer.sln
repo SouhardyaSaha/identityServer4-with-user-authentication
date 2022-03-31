@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.Core", "IdentityServer.Core\IdentityServer.Core.csproj", "{FBB5C823-3826-40CE-B445-42B6891E5A1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.Demo.Api.", "IdentityServer.Demo.Api\IdentityServer.Demo.Api..csproj", "{E01256B8-AD77-4A12-B714-8ADE4ECA2872}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdentityServer.Demo.Api", "IdentityServer.Demo.Api\IdentityServer.Demo.Api.csproj", "{E01256B8-AD77-4A12-B714-8ADE4ECA2872}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
