@@ -2,11 +2,13 @@
 using IdentityModel;
 using IdentityServer.Core.Models;
 using IdentityServer4.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityServer.Core.Controllers;
 
+[AllowAnonymous]
 public class AccountController : Controller
 {
     private readonly UserManager<AppUser> _userManager;
@@ -23,6 +25,7 @@ public class AccountController : Controller
         _interaction = interaction;
     }
 
+    [HttpGet]
     public IActionResult Login(string returnUrl)
     {
         var vm = new LoginViewModel
@@ -31,6 +34,46 @@ public class AccountController : Controller
         };
 
         return View(vm);
+    }
+    
+    [HttpPost]
+    public async Task<IActionResult> Login(LoginViewModel model)
+    {
+        // check if we are in the context of an authorization request
+        var context = await _interaction.GetAuthorizationContextAsync(model.ReturnUrl);
+
+        if (ModelState.IsValid)
+        {
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberLogin, lockoutOnFailure: false);
+
+            if (result.Succeeded)
+            {
+                if (context != null)
+                {
+                    // we can trust model.ReturnUrl since GetAuthorizationContextAsync returned non-null
+                    return Redirect(model.ReturnUrl);
+                }
+
+                // request for a local page
+                if (Url.IsLocalUrl(model.ReturnUrl))
+                {
+                    return Redirect(model.ReturnUrl);
+                }
+                else if (string.IsNullOrEmpty(model.ReturnUrl))
+                {
+                    return Redirect("~/");
+                }
+                else
+                {
+                    // user might have clicked on a malicious link - should be logged
+                    throw new Exception("invalid return URL");
+                }
+            }
+
+            ModelState.AddModelError(string.Empty, "Invalid credentials");
+        }
+
+        return View(model);
     }
 
     [HttpGet]
@@ -47,6 +90,7 @@ public class AccountController : Controller
         return Redirect(logout.PostLogoutRedirectUri);
     }
 
+    [HttpGet]
     public IActionResult Register()
     {
         return View();
