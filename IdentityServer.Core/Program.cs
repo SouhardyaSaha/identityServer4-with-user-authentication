@@ -1,5 +1,10 @@
+using System.Security.Claims;
+using IdentityModel;
 using IdentityServer.Core.Data;
+using IdentityServer.Core.Data.Seed;
 using IdentityServer.Core.Extensions;
+using IdentityServer.Core.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +30,9 @@ try
 {
     var context = services.GetRequiredService<ApplicationDbContext>();
     await context.Database.MigrateAsync();
+    
+    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    await Seed.SeedUsersAsync(userManager);
 }
 catch (Exception ex)
 {
